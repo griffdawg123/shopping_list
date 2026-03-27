@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "shopping",
+  "project_id": "0248ce1b-d98b-40e5-914b-ab540213c70b"
+}
