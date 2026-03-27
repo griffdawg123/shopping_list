@@ -28,7 +28,7 @@ def get_build_id():
         else:
             # Fallback to curl if requests is blocked
             import subprocess
-            cmd = f'curl -s -H "User-Agent: {USER_AGENT}" {BASE_URL} | grep -o \'"buildId":"[^"]*"\' | cut -d\'"\' -f4'
+            cmd = f'curl -s -H "User-Agent: {USER_AGENT}" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8" -H "Accept-Language: en-US,en;q=0.9" {BASE_URL} | grep -o \'"buildId":"[^"]*"\' | cut -d\'"\' -f4'
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
             if result.stdout.strip():
                 return result.stdout.strip()

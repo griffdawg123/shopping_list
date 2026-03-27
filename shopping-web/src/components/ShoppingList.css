@@ -1,0 +1,64 @@
+.shopping-list {
+  padding: 10px;
+}
+
+.list-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.list-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.list-input button {
+  padding: 10px 20px;
+  background: #007aff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-items li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.list-items li.checked span {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.list-items input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.list-items span {
+  flex: 1;
+}
+
+.list-items .remove {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 10px;
+}

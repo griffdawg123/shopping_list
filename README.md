@@ -2,43 +2,79 @@
 
 A tool to help you find the cheapest groceries across Coles, Woolworths, and Aldi in Australia.
 
-## Current Progress: Phase 1 - API Research & CLI Tools
+## Quick Start
 
-We have successfully reverse-engineered the internal APIs for Coles and Woolworths and investigated Aldi's online presence.
-
-### 🛠️ CLI Tools
-
-Four Python scripts are available to search for products:
-
-- `coles.py`: Searches Coles using their Next.js internal API.
-- `woolworths.py`: Searches Woolworths using their internal REST API (defaults to Sydney CBD for pricing).
-- `aldi.py`: Searches Aldi's website (limited to Special Buys and Super Savers).
-- `compare.py`: Searches all three supermarkets and ranks products by price per unit.
-
-#### Usage
+### Web App (Recommended)
 
 ```bash
-./coles.py "milk"
-./woolworths.py "milk"
-./aldi.py "pesto"
-./compare.py "milk"
+cd shopping-web
+npm install
+npm start          # Terminal 1: React app on http://localhost:3000
+node server.js     # Terminal 2: Backend API
 ```
 
-### 📄 Documentation
+Open http://localhost:3000 in your browser.
 
-Detailed research notes for each store are available in the repository:
-- `COLES.md`
-- `WOOLWORTHS.md`
-- `ALDI.md`
+### CLI Tools
 
-## 🚀 Roadmap
+```bash
+./coles.py "milk"       # Search Coles
+./woolworths.py "milk"  # Search Woolworths
+./compare.py "milk"     # Compare both (ranked by unit price)
+```
 
-1. **Design Database Schema**: Store users, lists, and cross-store product mappings.
-2. **Implement Backend Service**: Price optimization engine and list management API.
-3. **Store Location & Aisle Mapping**: Logic for "home shop" selection and localized sorting.
-4. **Develop Web & Mobile Apps**: Modern interfaces for list creation and in-store shopping.
+## Architecture
 
-## 🤝 Contributing
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   React Web     │────▶│   Express.js    │────▶│   Python CLI    │
+│   (localhost)   │     │   (port 3000)    │     │   Scripts       │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                        │
+                                                        ▼
+                                                ┌─────────────────┐
+                                                │   Coles/WW      │
+                                                │   Scrapers      │
+                                                └─────────────────┘
+```
 
-This project uses **beads** for issue tracking.
-Run `bd ready` to see available tasks.
+## Project Structure
+
+```
+shopping/
+├── shopping-web/           # React web app (recommended)
+│   ├── src/
+│   │   ├── components/    # UI components
+│   │   ├── services/      # API client
+│   │   └── types/         # TypeScript types
+│   └── server.js          # Express backend
+├── ShoppingApp/           # React Native mobile app (experimental)
+├── ShoppingApp/           # React Native mobile app (experimental)
+├── au-supermarket-apis/   # API specifications
+├── coles_api.py          # Coles API script (requires key)
+├── woolworths_api.py      # Woolworths API script (requires key)
+├── compare.py             # Price comparison script
+├── coles.py               # Coles scraper
+├── woolworths.py          # Woolworths scraper
+└── aldi.py               # Aldi scraper (limited)
+```
+
+## Aldi Strategy
+
+**User-entered prices** - Aldi has no public API. Instead, users enter prices they find while shopping at Aldi. See [ALDI.md](ALDI.md) for details.
+
+## Documentation
+
+- [COLES.md](COLES.md) - Coles API research
+- [WOOLWORTHS.md](WOOLWORTHS.md) - Woolworths API research
+- [ALDI.md](ALDI.md) - Aldi strategy (user-entered prices)
+- [au-supermarket-apis/README.md](au-supermarket-apis/README.md) - API specs
+
+## Roadmap
+
+- [x] Coles/Woolworths price comparison
+- [x] Web app interface
+- [ ] User-entered Aldi price storage
+- [ ] Product barcode scanning
+- [ ] Cross-store product matching
+- [ ] Price history tracking

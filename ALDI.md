@@ -1,29 +1,32 @@
-# Aldi API Research
+# Aldi Price Strategy
 
-Aldi Australia does not have a comprehensive public search API for all groceries. Its website primarily focuses on **Special Buys** and **Super Savers**.
+**Status: Pivoted from API scraping to user-entered prices**
 
-## Endpoints
+## Why User-Entered Prices?
 
-- **Special Buys / Super Savers:** `https://www.aldi.com.au/products`
-- **Search (Limited):** `https://www.aldi.com.au/en/search-results/?q={query}`
+Aldi will tend to be cheaper than Coles and Woolworths for most items. Rather than spending effort scraping incomplete Aldi data, we flip the model:
 
-## Reverse Engineering Insights
+1. When shopping at Aldi, users enter prices they find
+2. These prices are stored and used as the "best price" baseline
+3. Before shopping, users check if Aldi has the item cheaper than both big supermarkets
+4. If Aldi doesn't have it or it's more expensive, they shop at Coles/Woolworths
 
-Aldi uses a Nuxt.js-powered frontend. The product data for the current page is often embedded in the `__NUXT_DATA__` script tag or similar JSON structures within the HTML.
+This approach:
+- Is more reliable (Aldi's online presence is limited)
+- Reflects reality (Aldi IS typically cheaper)
+- Saves time (check Aldi first, then fill gaps at big supermarkets)
 
-### Alternative: DoorDash API
-A more comprehensive list of Aldi's everyday range can be accessed via the **DoorDash API**, as Aldi uses DoorDash for its delivery service.
-- **DoorDash Store ID:** Required to fetch the menu.
-- **Endpoint:** `https://www.doordash.com/api/v2/store/{store_id}/menu/`
+## Data Model
 
-## Response Structure (Web Scrape)
+User-entered prices will include:
+- Product name (or scanned barcode)
+- Price
+- Unit price (if available)
+- Date entered
+- Optional: store location
 
-When scraping the website, look for these fields in the embedded JSON:
-- `name`: Product name
-- `price.amountRelevantDisplay`: Current price
-- `price.comparisonDisplay`: Unit price (e.g., "$0.99 per 100 g")
+## Future Enhancements
 
-## Notes
-- User-Agent header is mandatory.
-- Regional availability is highly relevant at Aldi.
-- Full inventory is generally not available online via Aldi's official channels.
+- Barcode scanning for quick entry
+- Receipt photo parsing (OCR)
+- Crowd-sourced price database (community sharing)

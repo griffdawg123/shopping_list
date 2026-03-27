@@ -9,13 +9,32 @@ A shopping list application that compares prices across Coles, Woolworths, and A
 ### Supermarket API Status
 - **Coles**: Uses Next.js data endpoints. Requires a dynamic `buildId` extracted from the homepage.
 - **Woolworths**: Uses a POST-based internal REST API. Requires a `WOL-StoreId` cookie for localized pricing (Default: `1265` for Sydney CBD).
-- **Aldi**: No public search API. Web search is limited to "Special Buys" and "Super Savers". Further research into DoorDash API or internal catalogues is required for everyday items.
+- **Aldi**: No public search API. Strategy is user-entered prices (see ALDI.md).
 
 ### CLI Tools
 - `./coles.py <query>`: Search Coles.
 - `./woolworths.py <query>`: Search Woolworths.
-- `./aldi.py <query>`: Search Aldi (Limited).
+- `./aldi.py <query>`: Search Aldi (Limited - Special Buys/Super Savers).
 - `./compare.py <query>`: Compare all three supermarkets and rank by price per unit.
+
+### API Scripts (experimental - require API keys)
+- `./coles_api.py <query>`: Uses Coles official API (requires `Ocp-Apim-Subscription-Key`).
+- `./woolworths_api.py <query>`: Uses Woolworths mobile API (requires `X-Api-Key`).
+
+### Web Application
+- `shopping-web/`: React web app for price comparison
+  - Start: `cd shopping-web && npm start`
+  - Backend: `node server.js` (runs Python scripts)
+
+### Mobile Application
+- `ShoppingApp/`: React Native mobile app (experimental)
+- Status: Has issues with Metro bundler on some setups
+
+## Context Preservation
+
+Any changes you make, you should make sure to update README.md to reflect the current state of the project. This is critical for maintaining context for future sessions and other agents.
+
+You should also update AGENTS.md with any new tools, commands, or workflows you establish during your work. This ensures that all agents have access to the latest information and can operate effectively.
 
 ## Quick Reference
 
@@ -77,7 +96,6 @@ bd close <id>         # Complete work
 4. **PUSH TO REMOTE** - This is MANDATORY:
    ```bash
    git pull --rebase
-   bd dolt push
    git push
    git status  # MUST show "up to date with origin"
    ```
