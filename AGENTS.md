@@ -2,6 +2,20 @@
 
 This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get started.
 
+## Project Context: Shopping List App
+
+A shopping list application that compares prices across Coles, Woolworths, and Aldi (Australia).
+
+### Supermarket API Status
+- **Coles**: Uses Next.js data endpoints. Requires a dynamic `buildId` extracted from the homepage.
+- **Woolworths**: Uses a POST-based internal REST API. Requires a `WOL-StoreId` cookie for localized pricing (Default: `1265` for Sydney CBD).
+- **Aldi**: No public search API. Web search is limited to "Special Buys" and "Super Savers". Further research into DoorDash API or internal catalogues is required for everyday items.
+
+### CLI Tools
+- `./coles.py <query>`: Search Coles.
+- `./woolworths.py <query>`: Search Woolworths.
+- `./aldi.py <query>`: Search Aldi (Limited).
+
 ## Quick Reference
 
 ```bash
@@ -29,12 +43,6 @@ rm -f file                  # NOT: rm file
 rm -rf directory            # NOT: rm -r directory
 cp -rf source dest          # NOT: cp -r source dest
 ```
-
-**Other commands that may prompt:**
-- `scp` - use `-o BatchMode=yes` for non-interactive
-- `ssh` - use `-o BatchMode=yes` to fail instead of prompting
-- `apt-get` - use `-y` flag
-- `brew` - use `HOMEBREW_NO_AUTO_UPDATE=1` env var
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker
