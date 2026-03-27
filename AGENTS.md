@@ -15,6 +15,7 @@ A shopping list application that compares prices across Coles, Woolworths, and A
 - `./coles.py <query>`: Search Coles.
 - `./woolworths.py <query>`: Search Woolworths.
 - `./aldi.py <query>`: Search Aldi (Limited).
+- `./compare.py <query>`: Compare all three supermarkets and rank by price per unit.
 
 ## Quick Reference
 

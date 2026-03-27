@@ -8,11 +8,12 @@ We have successfully reverse-engineered the internal APIs for Coles and Woolwort
 
 ### 🛠️ CLI Tools
 
-Three Python scripts are available to search for products:
+Four Python scripts are available to search for products:
 
 - `coles.py`: Searches Coles using their Next.js internal API.
 - `woolworths.py`: Searches Woolworths using their internal REST API (defaults to Sydney CBD for pricing).
 - `aldi.py`: Searches Aldi's website (limited to Special Buys and Super Savers).
+- `compare.py`: Searches all three supermarkets and ranks products by price per unit.
 
 #### Usage
 
@@ -20,6 +21,7 @@ Three Python scripts are available to search for products:
 ./coles.py "milk"
 ./woolworths.py "milk"
 ./aldi.py "pesto"
+./compare.py "milk"
 ```
 
 ### 📄 Documentation

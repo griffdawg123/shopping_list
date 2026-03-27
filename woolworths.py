@@ -28,11 +28,16 @@ def search_products(query):
         response = session.post(SEARCH_URL, headers=headers, json=payload)
         response.raise_for_status()
         data = response.json()
-        results = data.get("Products", [])
-        if results and isinstance(results[0], dict) and "Products" in results[0]:
-            # Handle case where results are nested in the first element
-            results = results[0].get("Products", [])
-        return results
+        
+        tiles = data.get("Products", [])
+        all_products = []
+        for tile in tiles:
+            if tile is not None and "Products" in tile and tile["Products"]:
+                # The tile often contains a list of products (usually just one)
+                # We prefer the info from the first product in the tile
+                all_products.extend(tile["Products"])
+        
+        return all_products
     except Exception as e:
         print(f"Error searching Woolworths products: {e}")
         sys.exit(1)
